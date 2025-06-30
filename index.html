@@ -8,12 +8,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     :root {
-      --primary-color: #2C3E50; /* dark blue-gray */
-      --secondary-color: #18BC9C; /* teal */
-      --background-color: #F7F9F9; /* light gray */
-      --accent-color: #E67E22; /* orange */
-      --text-color: #34495E; /* dark slate */
-      --hover-bg: #d6f5ef; /* light teal hover background */
+      --primary-color: #2C3E50;
+      --secondary-color: #18BC9C;
+      --background-color: #F7F9F9;
+      --accent-color: #E67E22;
+      --text-color: #34495E;
+      --hover-bg: #d6f5ef;
     }
 
     body {
@@ -38,32 +38,71 @@
       user-select: none;
     }
 
-    .gallery {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-
-    .gallery img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
+    .main-photo-container {
+      max-width: 350px;
+      margin: 0 auto 15px;
+      position: relative;
       border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       cursor: pointer;
-      filter: brightness(97%);
+      transition: box-shadow 0.3s ease;
     }
 
-    .gallery img:hover {
+    .main-photo-container:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .main-photo {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 350px;
+    }
+
+    .btn-view-more {
+      display: block;
+      max-width: 350px;
+      margin: 0 auto 40px;
+      font-weight: 600;
+      background-color: var(--secondary-color);
+      border: none;
+      color: white;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 22px rgba(24, 188, 156, 0.6);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .btn-view-more:hover {
+      background-color: #149d89;
+    }
+
+    /* Modal Gallery Styles */
+    .modal-body {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .modal-body img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .modal-body img:hover {
       transform: scale(1.1);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
-      filter: brightness(110%);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
     }
 
-    /* Sections container */
     .profile-section {
       max-width: 720px;
       margin: 20px auto;
@@ -73,15 +112,12 @@
       box-shadow: 0 10px 30px rgba(44, 62, 80, 0.15);
       transition: background-color 0.35s ease;
       cursor: default;
-      animation: fadeInUp 0.8s ease forwards;
-      opacity: 0;
     }
 
     .profile-section:hover {
       background-color: var(--hover-bg);
     }
 
-    /* Headings */
     .profile-section h3 {
       border-bottom: 3px solid var(--secondary-color);
       padding-bottom: 8px;
@@ -117,7 +153,6 @@
       font-weight: 900;
     }
 
-    /* Contact box */
     .contact-box {
       max-width: 720px;
       margin: 50px auto 20px;
@@ -131,8 +166,6 @@
       box-shadow: 0 10px 25px rgba(24, 188, 156, 0.6);
       letter-spacing: 1.1px;
       user-select: none;
-      animation: fadeInUp 1.4s ease forwards;
-      opacity: 0;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
@@ -141,22 +174,22 @@
       background-color: #149d89;
     }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     @media (max-width: 575px) {
-      .gallery img {
-        width: 140px;
-        height: 140px;
+      .main-photo-container {
+        max-width: 100%;
+      }
+
+      .main-photo {
+        height: 250px;
+      }
+
+      .btn-view-more {
+        max-width: 100%;
+      }
+
+      .modal-body img {
+        width: 90px;
+        height: 90px;
       }
 
       .profile-section {
@@ -173,12 +206,56 @@
 <body>
   <header>In the name of Allah, the Lord of the worlds</header>
 
-  <div class="gallery" aria-label="Profile pictures">
-    <img src="pics/c6b7ffbb-e6b6-4e1b-a1c4-a42f1f58b202.jpg" alt="Groom Photo 1" />
-    <img src="pics/a911929b-e93b-46ee-b37f-b1641ae8a302.jpg" alt="Groom Photo 2" />
-    <img src="pics/e5d43321ac2bbdf66fa7f3bf67d0ffe5bc645a34-1.jpg" alt="Groom Photo 3" />
+  <div class="main-photo-container" role="img" aria-label="Main Groom Photo">
+    <img
+      src="pics/c6b7ffbb-e6b6-4e1b-a1c4-a42f1f58b202.jpg"
+      alt="Main Groom Photo"
+      class="main-photo"
+      id="mainPhoto"
+      tabindex="0"
+      data-bs-toggle="modal"
+      data-bs-target="#photoModal"
+    />
   </div>
 
+  <button
+    type="button"
+    class="btn-view-more"
+    data-bs-toggle="modal"
+    data-bs-target="#photoModal"
+  >
+    View More Photos
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="photoModal"
+    tabindex="-1"
+    aria-labelledby="photoModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="photoModalLabel">Photos</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <img src="pics/c6b7ffbb-e6b6-4e1b-a1c4-a42f1f58b202.jpg" alt="Photo 1" />
+          <img src="pics/a911929b-e93b-46ee-b37f-b1641ae8a302.jpg" alt="Photo 2" />
+          <img src="pics/e5d43321ac2bbdf66fa7f3bf67d0ffe5bc645a34-1.jpg" alt="Photo 3" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile sections -->
   <section class="profile-section" aria-label="Basic Information">
     <h3>Basic Information</h3>
     <p><strong>Male</strong></p>
@@ -191,7 +268,7 @@
     <p><strong>Family in USA:</strong> 2 Uncles Well Settled</p>
   </section>
 
-  <section class="profile-section" aria-label="Profile Status & Background">
+  <section class="profile-section" aria-label="Status & Background">
     <h3>Status & Background</h3>
     <p><strong>Marital Status:</strong> Never Married, Never in a Relationship</p>
     <p><strong>Ethnicity:</strong> Lahore Pakistan</p>
@@ -231,7 +308,12 @@
     </ul>
   </section>
 
-  <div class="contact-box" role="contentinfo" aria-label="Contact Information" tabindex="0">
+  <div
+    class="contact-box"
+    role="contentinfo"
+    aria-label="Contact Information"
+    tabindex="0"
+  >
     📞 Contact: ‪(346) 291-4588‬
   </div>
 
