@@ -5,176 +5,228 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Marriage Profile - AA</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f0f4ff, #d9e8ff);
-      margin: 0;
-      padding: 0;
-      color: #333;
+    /* Color variables */
+    :root {
+      --dark-blue: #213448;
+      --medium-blue: #547792;
+      --light-blue: #94B4C1;
+      --cream: #ECEFCA;
+      --text-dark: #0e1c2b;
     }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* Container */
     .container {
-      max-width: 850px;
+      max-width: 1000px;
       margin: 40px auto;
-      background: #fff;
+      background: white;
       padding: 30px 40px;
       border-radius: 15px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 12px 30px rgba(33, 52, 72, 0.2);
     }
-    h1 {
-      color: #1a237e;
+
+    /* Header */
+    header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      color: var(--dark-blue);
+      font-weight: 700;
+      font-size: 1.6rem;
+      font-style: italic;
       letter-spacing: 1.2px;
     }
-    h2 {
-      margin-top: 0;
-      padding: 8px 15px;
-      border-radius: 10px;
-      color: #fff;
-      font-weight: 600;
-    }
-    .section {
-      margin-bottom: 25px;
-      padding: 15px 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.1);
-    }
-    /* Colorful backgrounds for each section */
-    .section:nth-of-type(1) { background: #7986cb; } /* Basic Info */
-    .section:nth-of-type(2) { background: #64b5f6; } /* Family Background */
-    .section:nth-of-type(3) { background: #4db6ac; } /* Legal Status */
-    .section:nth-of-type(4) { background: #81c784; } /* Education */
-    .section:nth-of-type(5) { background: #aed581; } /* Profession */
-    .section:nth-of-type(6) { background: #ffd54f; } /* About Him */
-    .section:nth-of-type(7) { background: #ffb74d; } /* Hobbies */
-    .section:nth-of-type(8) { background: #e57373; } /* Partner Preferences */
 
-    /* Text colors for better contrast */
-    .section p, .section strong {
-      color: #fff;
-      font-weight: 500;
-      margin: 5px 0;
-    }
-
-    /* Gallery styles */
-    .gallery {
+    /* Main flex layout for Groom and Partner sections */
+    .main-sections {
       display: flex;
-      gap: 25px;
-      margin-bottom: 35px;
+      gap: 40px;
       flex-wrap: wrap;
       justify-content: center;
     }
-    .gallery img {
-      width: 240px;
-      height: 240px;
-      object-fit: cover;
+
+    /* Groom & Partner containers */
+    .groom-section, .partner-section {
+      background: var(--light-blue);
+      padding: 25px 30px;
       border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      box-shadow: 0 6px 20px rgba(33, 52, 72, 0.15);
+      flex: 1 1 400px;
+      min-width: 320px;
+      color: var(--dark-blue);
+    }
+
+    /* Section headings with icons */
+    h2 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 3px solid var(--medium-blue);
+      padding-bottom: 8px;
+      color: var(--dark-blue);
+    }
+
+    /* Groom gallery */
+    .gallery {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .gallery img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      box-shadow: 0 6px 18px rgba(33, 52, 72, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      filter: brightness(95%);
+      border-radius: 12px;
+      filter: brightness(97%);
     }
     .gallery img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 12px 40px rgba(26, 35, 126, 0.3);
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(33, 52, 72, 0.4);
       filter: brightness(110%);
+    }
+
+    /* Profile details */
+    .details p {
+      margin: 7px 0;
+      font-weight: 600;
+    }
+    .details p strong {
+      color: var(--medium-blue);
+    }
+
+    /* Partner preferences list */
+    .partner-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .partner-list li {
+      margin-bottom: 12px;
+      font-weight: 600;
+      position: relative;
+      padding-left: 24px;
+      color: var(--dark-blue);
+    }
+    /* Simple check icon using CSS */
+    .partner-list li::before {
+      content: '✔️';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 1.2rem;
+      color: var(--medium-blue);
     }
 
     /* Contact box */
     .contact {
+      margin-top: 30px;
+      background: var(--medium-blue);
+      color: white;
       font-weight: 700;
-      background: #1a237e;
-      color: #fff;
-      padding: 18px;
+      padding: 15px;
       border-radius: 12px;
       text-align: center;
-      font-size: 1.2rem;
-      box-shadow: 0 6px 18px rgba(26, 35, 126, 0.4);
+      font-size: 1.3rem;
+      box-shadow: 0 6px 18px rgba(33, 52, 72, 0.5);
       letter-spacing: 1.1px;
       user-select: none;
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 600px) {
-      .gallery {
-        justify-content: center;
+    /* Responsive */
+    @media (max-width: 850px) {
+      .main-sections {
+        flex-direction: column;
+        gap: 30px;
       }
       .gallery img {
-        width: 90vw;
-        height: 90vw;
-      }
-      .container {
-        padding: 20px;
-        margin: 20px;
+        width: 100%;
+        max-width: 320px;
+        height: auto;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Marriage Profile</h1>
+    <header>In the name of Allah, the Lord of the worlds</header>
 
-    <div class="gallery">
-      <img src="pics/c6b7ffbb-e6b6-4e1b-a1c4-a42f1f58b202.jpg" alt="Profile Image 1" />
-      <img src="pics/a911929b-e93b-46ee-b37f-b1641ae8a302.jpg" alt="Profile Image 2" />
-      <img src="pics/e5d43321ac2bbdf66fa7f3bf67d0ffe5bc645a34-1.jpg" alt="Profile Image 3" />
+    <div class="main-sections">
+
+      <!-- Groom Profile Section -->
+      <section class="groom-section" aria-label="Groom Profile">
+        <h2>👨 Groom Profile</h2>
+
+        <div class="gallery" aria-label="Groom Photos">
+          <img src="pics/c6b7ffbb-e6b6-4e1b-a1c4-a42f1f58b202.jpg" alt="Groom Photo 1" />
+          <img src="pics/a911929b-e93b-46ee-b37f-b1641ae8a302.jpg" alt="Groom Photo 2" />
+          <img src="pics/e5d43321ac2bbdf66fa7f3bf67d0ffe5bc645a34-1.jpg" alt="Groom Photo 3" />
+        </div>
+
+        <div class="details">
+          <p><strong>Name:</strong> AA</p>
+          <p><strong>Gender:</strong> Male</p>
+          <p><strong>Age:</strong> 26</p>
+          <p><strong>Height:</strong> 6 ft</p>
+          <p><strong>Body Type:</strong> Slim</p>
+          <p><strong>Residence:</strong> TX, USA</p>
+          <p><strong>Ethnicity:</strong> Lahore, Pakistan</p>
+
+          <p><strong>Family:</strong> Lahore & South Africa</p>
+          <p><strong>Family in USA:</strong> 2 Uncles, Well Settled</p>
+
+          <p><strong>Legal Status:</strong> Green Card Sponsorship & H1B in progress</p>
+
+          <p><strong>Education:</strong> Bachelors in Software Engineering (Computer Science) – University of Houston</p>
+
+          <p><strong>Profession:</strong> Application Engineer & Embedded Support</p>
+
+          <p><strong>About Him:</strong> Honest, Hardworking, Mature, Prays & Fasts. No smoking, no drinking. Only Halal food.</p>
+
+          <p><strong>Hobbies:</strong> Wedding Films & Cinematic Editing, Traveling for Inspiration & Cultural Exploration</p>
+        </div>
+      </section>
+
+      <!-- Partner Preferences Section -->
+      <section class="partner-section" aria-label="Partner Preferences">
+        <h2>💖 Looking for a Girl</h2>
+        <ul class="partner-list">
+          <li>Age: 22–28</li>
+          <li>Height: 5'3" – 6 ft</li>
+          <li>Residence: USA</li>
+          <li>Education: Bachelor’s Degree</li>
+          <li>Profession: Any</li>
+          <li>Marital Status: Never Married</li>
+          <li>Religious Sect: Muslim</li>
+          <li>Hijabi: Yes</li>
+        </ul>
+      </section>
+
     </div>
 
-    <div class="section">
-      <h2>Basic Info</h2>
-      <p><strong>Name:</strong> AA</p>
-      <p><strong>Gender:</strong> Male</p>
-      <p><strong>Age:</strong> 26</p>
-      <p><strong>Height:</strong> 6 ft</p>
-      <p><strong>Body Type:</strong> Slim</p>
-      <p><strong>Residence:</strong> TX, USA</p>
-      <p><strong>Ethnicity:</strong> Lahore, Pakistan</p>
-    </div>
-
-    <div class="section">
-      <h2>Family Background</h2>
-      <p><strong>Family:</strong> Lahore & South Africa</p>
-      <p><strong>Family in USA:</strong> 2 Uncles, Well Settled</p>
-    </div>
-
-    <div class="section">
-      <h2>Legal Status</h2>
-      <p>Green Card Sponsorship & H1B in progress</p>
-    </div>
-
-    <div class="section">
-      <h2>Education</h2>
-      <p>Bachelors in Software Engineering (Computer Science) – University of Houston</p>
-    </div>
-
-    <div class="section">
-      <h2>Profession</h2>
-      <p>Application Engineer & Embedded Support</p>
-    </div>
-
-    <div class="section">
-      <h2>About Him</h2>
-      <p>Honest, Hardworking, Mature, Prays & Fasts. No smoking, no drinking. Only Halal food.</p>
-    </div>
-
-    <div class="section">
-      <h2>Hobbies</h2>
-      <p>Wedding Films & Cinematic Editing, Traveling for Inspiration & Cultural Exploration</p>
-    </div>
-
-    <div class="section">
-      <h2>Partner Preferences</h2>
-      <p><strong>Age:</strong> 22–28</p>
-      <p><strong>Height:</strong> 5'3" – 6 ft</p>
-      <p><strong>Residence:</strong> USA</p>
-      <p><strong>Education:</strong> Bachelor's Degree</p>
-      <p><strong>Profession:</strong> Any</p>
-      <p><strong>Marital Status:</strong> Never Married</p>
-      <p><strong>Religious Sect:</strong> Muslim</p>
-      <p><strong>Hijabi:</strong> Yes</p>
-    </div>
-
-    <div class="contact">
+    <div class="contact" role="contentinfo">
       📞 Contact: ‪(346) 291-4588‬
     </div>
   </div>
