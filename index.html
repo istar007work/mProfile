@@ -13,7 +13,7 @@
       --primary-color: #213448;
       --secondary-color: #547792;
       --accent-color: #94B4C1;
-      --background-color: #ECEFCA;
+      --background-color: #ddded7;
       --text-color: #213448;
       --hover-bg: #d1d9e6;
     }
@@ -181,10 +181,15 @@
       background-color: #436a95;
     }
 
-    @media (max-width: 575px) {
-      .main-photo-container {
-        max-width: 100%;
+    @media (max-width: 768px) {
+      img.responsive-square {
+        width: 100%;      /* Full width of container */
+        height: auto;     /* Reset height so we can use padding trick */
+        aspect-ratio: 1 / 1; /* Makes the height equal to width, so square */
+        object-fit: cover; /* Crop/scale image nicely */
       }
+    }
+
 
       .main-photo {
         height: 250px;
