@@ -226,6 +226,21 @@
 
     }
   </style>
+
+  <script>
+  // Change this to your desired password
+  const correctPassword = "1122";
+
+  // Prompt for password when page loads
+  const userPassword = prompt("This page is protected. Please enter the password:");
+
+  if (userPassword !== correctPassword) {
+    alert("Incorrect password. Access denied.");
+    // Redirect to another page or close the tab
+    window.location.href = "https://www.google.com"; // Or any fallback page
+  }
+</script>
+
 </head>
 <body>
   <header> بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</header>
